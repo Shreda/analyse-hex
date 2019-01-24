@@ -6,24 +6,59 @@ void print_int_arr(int [], int);
 void swap(int *, int *);
 int partition (int [], int, int);
 void quick_sort(int [], int, int);
+int get_median(int [], int);
 
 int main(void) {
+    //To use this program, you should call it like this:
+    // ./analyse_passwords < file.txt
     int NUM_PASSWORDS = 1000;
     int passwords[NUM_PASSWORDS];
-    
+    int n = 0;
+    int highest = 0;
+    int lowest = 0;
+    int range = 0;
+    int median = 0;
+
+    // Read 1000 passwords from stdin
     read_input(passwords, NUM_PASSWORDS);
-    int n = sizeof(passwords)/sizeof(passwords[0]);
+
+    // Sort the hex passwords
+    n = sizeof(passwords)/sizeof(passwords[0]);
     quick_sort(passwords, 0, n-1);
-    print_int_arr(passwords, NUM_PASSWORDS);
+    
+    // Caclulate some potentially interesting values
+    highest = passwords[NUM_PASSWORDS-1];
+    lowest = passwords[0];
+    range = highest - lowest;
+    median = get_median(passwords, NUM_PASSWORDS);
+
+    // Print these values
+    printf("Highest generated hex value: %06X\n", highest);
+    printf("Lowest generated hex value: %06X\n", lowest);
+    printf("Range of generated values: %06X\n", range);
+    printf("Median of generated hex values: %06X\n", median);
     return 0;
 }
 
+// Returns the integer median of an array with n elements
+int get_median(int arr[], int n) {
+    int mindex = (n+1) / 2;
+
+    if(n%2 == 0) {
+        return (arr[mindex-1] + arr[mindex]) / 2;
+    } else {
+        return arr[mindex];
+    }
+}
+
+// Repeatedly scans values from stdin and assigns to array up to n
 void read_input(int arr[], int n) {
     for(int i=0 ; i<n ; i++) {
         scanf("%X", &arr[i]);
     }
 }
 
+// Prints values in a given array from 0...n
 void print_int_arr(int arr[], int n) {
     for(int i=0 ; i<n ; i++) {
         printf("%06X\n", arr[i]);
