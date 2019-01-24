@@ -1,10 +1,19 @@
 #include <stdio.h>
 
+// func prototypes
+void read_input(int [], int);
+void print_int_arr(int [], int);
+void swap(int *, int *);
+int partition (int [], int, int);
+void quick_sort(int [], int, int);
+
 int main(void) {
     int NUM_PASSWORDS = 1000;
     int passwords[NUM_PASSWORDS];
     
     read_input(passwords, NUM_PASSWORDS);
+    int n = sizeof(passwords)/sizeof(passwords[0]);
+    quick_sort(passwords, 0, n-1);
     print_int_arr(passwords, NUM_PASSWORDS);
     return 0;
 }
@@ -17,13 +26,12 @@ void read_input(int arr[], int n) {
 
 void print_int_arr(int arr[], int n) {
     for(int i=0 ; i<n ; i++) {
-        printf("%X\n", arr[i]);
+        printf("%06X\n", arr[i]);
     }
 }
 
 // A utility function to swap two elements
-void swap(int* a, int* b)
-{
+void swap(int* a, int* b) {
     int t = *a;
     *a = *b;
     *b = t;
