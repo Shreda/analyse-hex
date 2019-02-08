@@ -10,7 +10,7 @@ def open_connection():
     # Read user password from stdin
     password = getpass(prompt='Password:') 
     # Connect to imap server with credentials
-    connection.login("dmoore@shearwater.com.au", password)
+    connection.login("example@example.com", password)
     return connection
 
 def print_mailboxes(connection):
@@ -40,5 +40,5 @@ if __name__ == '__main__':
     # Set up connection to server
     imap_connection = open_connection()
     # Read emails from specific mailbox
-    read_mailbox(imap_connection, "2019/Hollard/SEH1451/support_emails")
+    read_mailbox(imap_connection, "path/to/mailbox")
 
